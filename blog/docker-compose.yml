@@ -6,7 +6,9 @@ services:
     container_name: ghost
     environment:
       - NODE_ENV=production
-      - PROD_DOMAIN=blog.aria.ai
+      - PROD_DOMAIN="http://blog.aria.ai"
+      - MAILGUN_USER=@@MGU
+      - MAILGUN_PASS=@@MGP
     ports:
       - "2368:2368"
     volumes:
