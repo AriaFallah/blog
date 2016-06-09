@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  ghost:
+    image: ar14/ghost
+    container_name: ghost
+    ports:
+      - "2368:2368"
+    depends_on:
+      - nginx
+    volumes:
+      - ghost-blog:/var/lib/ghost
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+
+volumes:
+  ghost-blog:
+    external: true
