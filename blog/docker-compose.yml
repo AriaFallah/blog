@@ -14,6 +14,7 @@ services:
       - ghost-blog:/var/lib/ghost
   nginx:
     build: ./nginx
+    image: ar14/blog/nginx
     container_name: nginx
     ports:
       - "80:80"
