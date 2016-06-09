@@ -2,7 +2,8 @@ version: '2'
 
 services:
   ghost:
-    image: ar14/ghost
+    build: ./ghost
+    image: ar14/blog/ghost
     container_name: ghost
     environment:
       - NODE_ENV=production
