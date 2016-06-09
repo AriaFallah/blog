@@ -4,10 +4,12 @@ services:
   ghost:
     image: ar14/ghost
     container_name: ghost
-    ports:
-      - "2368:2368"
     depends_on:
       - nginx
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "2368:2368"
     volumes:
       - ghost-blog:/var/lib/ghost
   nginx:
