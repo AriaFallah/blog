@@ -6,6 +6,7 @@ services:
     container_name: ghost
     environment:
       - NODE_ENV=production
+      - PROD_DOMAIN=blog.aria.ai
     ports:
       - "2368:2368"
     volumes:
