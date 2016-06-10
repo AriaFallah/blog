@@ -21,7 +21,11 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    volumes:
+      - nginx:/etc/nginx
 
 volumes:
   ghost-blog:
+    external: true
+  nginx:
     external: true
