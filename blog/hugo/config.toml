@@ -8,9 +8,10 @@ canonifyurls = false
 
 [params]
   author = "Aria Fallah"
+  authorpicture = "images/author.png"
   authorlocation = "127.0.0.1"
   authorwebsite = "https://aria.ai"
   cover = "images/cover.png"
-  description = "On a scale of 1 to my blog, this is my blog"
+  description = "On a scale of one to my blog, this is my blog."
   googleAnalyticsUserID = "UA-79031036-1"
   logo = "images/logo.svg"
