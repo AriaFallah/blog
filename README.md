@@ -1,2 +1,3 @@
-# aria.ai
-Personal website
+# Blog
+
+Repo for https://blog.aria.ai
