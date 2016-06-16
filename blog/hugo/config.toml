@@ -5,6 +5,7 @@ paginate = 10
 DisqusShortname = "ariafallah"
 Copyright = "All rights reserved - 2016"
 canonifyurls = false
+theme = "casper"
 
 [params]
   author = "Aria Fallah"
