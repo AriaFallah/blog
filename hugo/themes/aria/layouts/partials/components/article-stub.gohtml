@@ -1,0 +1,13 @@
+<article class="stub">
+  <header>
+    <h2><a href="{{.RelPermalink}}">{{ .Title }}</a></h2>
+    <a href="https://aria.ai" class="small">{{.Site.Params.author}}</a>
+    <time class="small">{{ .Date.Format "2 Jan 2006" }}</time>
+  </header>
+  <section class="article">
+    <p>{{ .Summary | plainify }}</p>
+    {{if ne (len (trim (.Summary | plainify) " \n")) (len (trim (.Content | plainify) " \n") )}}
+      <a class="keep-reading" href="{{.RelPermalink}}">Keep reading</a>
+    {{end}}
+  </section>
+</article>

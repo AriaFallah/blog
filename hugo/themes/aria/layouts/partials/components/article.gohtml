@@ -1,0 +1,13 @@
+<article>
+  <header>
+    <h2><a href="{{.Permalink}}">{{.Title}}</a></h2>
+    <a href="https://aria.ai" class="small">{{.Site.Params.author}}</a>
+    <time class="small">{{ .Date.Format "2 Jan 2006" }}</time>
+  </header>
+  <section class="article">
+    {{ .Content }}
+  </section>
+  <footer>
+    {{ partial "components/disqus.gohtml" . }}
+  </footer>
+</article>
