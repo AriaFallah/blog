@@ -1,16 +1,9 @@
-BaseUrl= "https://blog.aria.ai/"
-LanguageCode= "en-EN"
-Title= "Aria"
+BaseUrl = "https://blog.aria.ai/"
+Title = "Aria"
 paginate = 100
-DisqusShortname = "ariafallah"
-Copyright = "All rights reserved - 2016"
 canonifyurls = false
 theme = "aria"
 
 [params]
   author = "Aria Fallah"
-  authorlocation = "127.0.0.1"
-  authorwebsite = "https://aria.ai"
-  description = "On a scale of one to my blog, this is my blog."
-  googleAnalyticsUserID = "UA-79031036-1"
   logo = "images/logo.svg"
