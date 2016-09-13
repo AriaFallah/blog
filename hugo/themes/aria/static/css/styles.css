@@ -7,15 +7,6 @@ html, body {
   height: 100%;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: normal;
-}
-
 a {
   color: #666;
   display: inline-block;
@@ -23,21 +14,30 @@ a {
 }
 
 p {
-  margin: 10px 0;
+  margin: 20px 0;
   line-height: 1.5em;
 }
 
 pre {
-  background-color: #1d1f21;
   border: none;
   font-size: 14px;
   line-height: 20px;
   width: 100%;
   position: relative;
+  margin: 20px 0;
 }
 
+code {
+  padding: 2px 5px;
+  background-color: #e7e7e7;
+}
 code:last-child {
   overflow-x: auto;
+}
+
+pre code {
+  padding: 0;
+  background-color: #fff;
 }
 
 blockquote {
@@ -60,7 +60,8 @@ hr {
 
 ol,
 ul {
-  margin-left: 10px;
+  padding: 0;
+  margin-left: 1em;
 }
 
 table {
@@ -78,6 +79,10 @@ table th,
 table td {
   padding: 6px 13px;
   border: 1px solid #ddd;
+}
+
+li + li {
+  margin-top: 10px;
 }
 
 .container {
@@ -110,7 +115,8 @@ table td {
 }
 
 .article h1,
-.article h2 {
+.article h2,
+.article h3 {
   padding-bottom: 0.3em;
   border-bottom: 1px solid #eee;
 }
@@ -129,11 +135,11 @@ table td {
 
 .page-wrap {
   min-height: 100%;
-  margin-bottom: -30px;
+  margin-bottom: -100px;
 }
 
 .site-footer, .page-wrap:after {
-  height: 30px;
+  height: 100px;
 }
 
 .page-wrap:after {
@@ -143,9 +149,9 @@ table td {
 
 .site-footer {
   display: flex;
-  align-items: center;
   padding-left: 10px;
   padding-right: 10px;
+  align-items: flex-end;
 }
 
 .stub .article p {
@@ -154,4 +160,8 @@ table td {
 
 .stub .article {
   padding-left: 0;
+}
+
+.title {
+  font-weight: normal;
 }

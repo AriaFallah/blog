@@ -3,7 +3,9 @@ Title = "Aria"
 paginate = 100
 canonifyurls = false
 theme = "aria"
+MetaDataFormat = "yaml"
 
 [params]
   author = "Aria Fallah"
   logo = "images/logo.svg"
+  description = "A blog about programming by Aria Fallah"
