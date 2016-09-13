@@ -1,5 +1,5 @@
 ---
-date: 2016-06-13T04:00:16-04:00
+date: 2016-09-13T01:40:14.700Z
 slug: hello-world
 tags:
   - "Hello"
@@ -7,61 +7,61 @@ tags:
 title: Hello World
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vulputate cursus magna, at egestas justo suscipit a. Pellentesque sit amet feugiat lectus. Maecenas sit amet finibus lorem, nec dignissim tellus. Integer ut luctus turpis. Nullam euismod eget nulla vitae eleifend. Quisque semper maximus aliquam. Proin imperdiet nunc id tempus convallis.
+I had some pretty good ideas for this blog a while ago, but now I've forgotten them all. The rest of this post will be a markdown demo.
 
 <!--more-->
 
+---
+
+Anyways this is what *italicized text*, **bold text**, and [links](https://google.com) look like.
+
+---
+
+Quotes
+
+> If the French noblesse had been capable of playing cricket with their peasants, their chateaux would never have been burnt.
+
+---
+
+Here's a roundabout way to filter out numbers less than two
+
 ```js
-export default function(intitialState: Object = {}, userConfig?: StoreConfig = {}): Function {
-  const config = { ...defaultConfig, ...userConfig }
-  const create = config.noHistory ? createDataWithoutHistory : partialRight(createData, config.historyLimit)
-  const dbObject = observable(asMap(mapValues(intitialState, (value) => create(value))))
-
-  // Store API
-  db.canRedo = (key: string): boolean => dbObject.get(key).__future.length > 0
-  db.canUndo = (key: string): boolean => dbObject.get(key).__past.length > 0
-  db.contents = (): Object => toJS(dbObject)
-  db.set = action((key: string, value: Array<any> | Object): void => dbObject.set(key, create(value)))
-  db.redo = action(redo)
-  db.undo = action(undo)
-  db.chain = chain
-  db.object = dbObject
-  db.schedule = schedule
-
-  // Query the DB, allowing the user to chain functions to query the store
-  function db(key: string, funcs?: Array<Function> | Function): Object {
-    if (!dbObject.get(key)) throw new Error('Tried to retrieve undefined key')
-    if (funcs) {
-      return chain(dbObject.get(key), funcs)
-    }
-    return dbObject.get(key)
-  }
-
-  // Redo any undone changes to the given store
-  function redo(key: string): void {
-    const obs = dbObject.get(key)
-    if (!db.canRedo(key)) {
-      throw new Error('You cannot call redo without having called undo first')
-    }
-
-    // Redo shouldn't trigger a push to history
-    obs.__trackChanges = false
-    obs.__past.push(revertChange(obs, obs.__future.pop()))
-  }
-
-  // Undo any changes the user has made to the current store
-  function undo(key: string): void {
-    const obs = dbObject.get(key)
-    if (!db.canUndo(key)) {
-      throw new Error('You cannot call undo if you have not made any changes')
-    }
-
-    // Undo shouldn't trigger a push to history
-    obs.__trackChanges = false
-    obs.__future.push(revertChange(obs, obs.__past.pop()))
-  }
-
-  // Return the database object
-  return db
+function identity<T>(x: T): T {
+  return x
 }
+
+[1, 2, 3, 4, 5]
+  .map(x => x > 2 ? x : null)
+  .filter(identity)
 ```
+
+---
+
+Lists
+
+1. Ignore blog
+2. Stop ignoring blog
+
+* Make ordered list
+* Make unordered list
+
+---
+
+Headings
+
+# HI
+## HI
+### HI
+#### HI
+##### HI
+###### HI
+
+---
+
+Tables
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:|------:|
+| col 1 is      | left-aligned  | $1600 |
+| col 2 is      | centered      |   $12 |
+| col 3 is      | right-aligned |    $1 |

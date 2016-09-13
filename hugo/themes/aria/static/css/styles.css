@@ -8,29 +8,22 @@ html, body {
 }
 
 h1,
-h1 *,
 h2,
-h2 *,
 h3,
-h3 *,
 h4,
-h4 *,
 h5,
-h5 *,
-h6
-h6 * {
-  font-family: 'Lato', sans-serif;
+h6 {
   font-weight: normal;
 }
 
 a {
-  display: inline-block;
   color: #666;
+  display: inline-block;
   text-decoration: none;
 }
 
 p {
-  margin: 10px;
+  margin: 10px 0;
   line-height: 1.5em;
 }
 
@@ -39,20 +32,56 @@ pre {
   border: none;
   font-size: 14px;
   line-height: 20px;
-  width: 100vw;
+  width: 100%;
   position: relative;
-  left: calc(-50vw + 50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+}
+
+code:last-child {
+  overflow-x: auto;
+}
+
+blockquote {
+  color: #777;
+  padding: 0 1em;
+  border-left: 0.25em solid #ddd;
 }
 
 time {
   color: #999;
 }
 
+hr {
+  height: .25em;
+  padding: 0;
+  margin: 24px 0;
+  background-color: #e7e7e7;
+  border: none;
+}
+
+ol,
+ul {
+  margin-left: 10px;
+}
+
+table {
+  width: 100%;
+  display: block;
+  overflow: auto;
+  border-collapse: collapse;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+}
+
+table th,
+table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
 .container {
-  width: 830px;
+  max-width: 830px;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
@@ -73,6 +102,21 @@ time {
 
 .article {
   padding: 10px;
+}
+
+.article a {
+  color: rgb(36, 195, 90);
+  text-decoration: underline;
+}
+
+.article h1,
+.article h2 {
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #eee;
+}
+
+.article a:visited {
+  color: rgb(26, 110, 16);
 }
 
 .stub + .stub {
@@ -102,4 +146,12 @@ time {
   align-items: center;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.stub .article p {
+  padding-left: 10px;
+}
+
+.stub .article {
+  padding-left: 0;
 }
