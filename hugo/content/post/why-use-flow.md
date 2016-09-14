@@ -14,6 +14,21 @@ code.
 
 <!--more-->
 
+Their own homepage says:
+
+> Flow can catch common bugs in JavaScript programs before they run, including
+>
+* silent type conversions,
+* null dereferences,
+* and the dreaded undefined is not a function.
+
+and
+
+> Flow also lets you gradually add type assertions to your code
+
+So flow is a solution to many common JavaScript problems that you can gradually introduce into your
+codebase. Pretty cool!
+
 ## Types
 
 Before we even address flow, however, we must first clarify what types are, and the different
@@ -45,10 +60,9 @@ x = 5
 print x + "" # cannot add integers to strings
 ```
 
-throws the error
+throws the following error
 
 ```python
-# cannot add integers to strings
 TypeError: unsupported operand type(s) for +: 'int' and 'str'
 ```
 
@@ -88,8 +102,9 @@ throughout your codebase, causing problems that are hard to find because there a
 ### Static typing vs. Dynamic typing
 
 Static vs Dynamic typing is a bit more controversial than Weak vs. Strong. I'm not going to be
-saying one is better than another, but rather that using static types, in my experience, is
-worthwhile. If you want to see a bit more debate about both, the following are great discussions
+saying one is better than another or giving a comprehensive breakdown of the benefits of each; instead,
+I'll just be giving a brief introduction of both. If you want to see a bit more debate which is better,
+the following are great discussions
 
 * [Is type safety worth the trade-offs?](http://programmers.stackexchange.com/questions/59606/is-type-safety-worth-the-trade-offs)
 * [What is the supposed productivity gain of dynamic typing?](http://programmers.stackexchange.com/questions/122205/what-is-the-supposed-productivity-gain-of-dynamic-typing)
@@ -97,7 +112,9 @@ worthwhile. If you want to see a bit more debate about both, the following are g
 Now given that disclaimer:
 
 In a statically typed language, you explicitly write out the types of your variables. Most people
-have seen Java, a strongly, statically typed language, where types look like this:
+have seen Java, a strongly, statically typed language, where you write the types of your variables
+out such as `int x`, and the return type and parameter types of your functions such as
+`int add(int a, int b)`:
 
 ```java
 public class Hello {
@@ -116,6 +133,9 @@ public class Hello {
 }
 ```
 
+This code will throw an error at line 8 when you compile your code because you cannot add
+a `String` type to an `int` type.
+
 Note that:
 
 * The error is caught at compile-time instead of at run-time, which means you can't even run the
@@ -125,9 +145,6 @@ Because you specified your types in advance, your code can be analyzed at a high
 compiling to find mistakes.
 * If the function was instead called `sfjkasjf` instead of `add`, you'd still know that it takes in
 two integers and returns an integer, which is useful information.
-* Static types help compilers optimize code by removing guesswork, meaning that you'll get better
-performance.
-* More stuff I don't feel like listing
 
 ---
 
@@ -149,19 +166,23 @@ def add(a, b):
   return a + b
 ```
 
+This code will throw an error at line 7 when you run your code because you cannot add
+a `string` type to an `int` type.
+
 Note that
 
 * The code is more concise
 * You can't really tell what the type of `a` and `b` are. `int`, `string`, `float`, `etc.` are all
 possibilities.
 * It still throws an error when you run it, albeit at run-time rather than compile-time, which is
-a big distinction. This means testing is more crucial for dynamically typed languages.
+a big distinction. This means testing is more crucial for dynamically typed languages because they
+will run just fine even if the code contains type errors.
 
 ---
 
-To be fair though about the conciseness, Java isn't the most terse language. Here's the same code in
-written in Haskell. I mean if I'm talking about types and don't write about Haskell, did I really
-write about types?
+To be fair about the conciseness, Java isn't the most terse language. Here's the same code
+written in some obligatory Haskell. I mean if I'm talking about types and don't write some Haskell,
+did I really talk about types?
 
 **Haskell**
 
@@ -181,13 +202,17 @@ add = (+)
 
 ## Bringing it back to JavaScript and Flow
 
+Now that we know more about types, we can get back to the matter at hand, which is making it harder
+to make mistakes in your JavaScript code.
+
 JavaScript is both weakly and dynamically typed, which is a flexible but extremely error prone
-combination as you can see in following example and countless others.
+combination as you can see in following example and countless others that criticize these qualities
+of the language.
 
 * [wat](https://www.destroyallsoftware.com/talks/wat)
 
-Flow grants static typing to JS, and in the process addresses a lot of the pain points of the
-language like the one above.
+The solution to all these problems is flow, which through static typing, addresses a lot of the pain
+points of the language like the one above.
 
 This isn't a tutorial, so if you want to follow along you can check out
 [the getting started guide for flow.](https://flowtype.org/docs/getting-started.html)
@@ -223,13 +248,30 @@ incorrect going on. The `wat` video doesn't really apply anymore.
 ### Benefits of annotating your code
 
 While flow will help catch errors like the one above, to truly start benefiting from it, you'll
-have to write your own annotations.
+have to write your own type annotations, meaning you use either flow's built in types such as
+`number`, `string`, `null`, `boolean`, `etc.` to specify the types of your variables or you create
+some type aliases of your own such as
+
+```js
+type Person = {
+  age: number,
+  name: string,
+  gender: 'male' | 'female'
+}
+```
+
+When you begin to do this, flow learns more about your code base and gets better at telling you what
+mistakes you've made.
+
+## Examples
 
 **Catches Incorrect Number of Parameters Passed to Function**
 
 Code:
 
 ```js
+// @flow
+
 function xyz(x: number, y: number, z: number): number {
   return x + y + z
 }
@@ -254,6 +296,8 @@ index.js:7
 Code:
 
 ```js
+// @flow
+
 function xyz(x: number, y: number, z: number): number {
   return x + y + z
 }
@@ -278,6 +322,8 @@ index.js:7
 Code:
 
 ```js
+// @flow
+
 function xyz(x: number, y: number, z: number): ?number {
   return Math.random() < 0.5 ? x + y + z : null
 }
@@ -306,6 +352,8 @@ index.js:11
 Code:
 
 ```js
+// @flow
+
 function xyz(x: number, y: number, z: number): number {
   return Math.random() < 0.5
     ? x + y + z
@@ -328,6 +376,8 @@ index.js:6
 Code:
 
 ```js
+// @flow
+
 type Person = {
   age: number,
   name: string,
@@ -352,6 +402,8 @@ index.js:9
 Code:
 
 ```js
+// @flow
+
 type Person = {
   age: number,
   name: string,
@@ -373,28 +425,25 @@ index.js:9
                  ^^^^^^ object type
 ```
 
----
-
-Finally, in my opinion, the code, while less concise, is easier to understand because all the types
-are written out everywhere.
-
 ## Going Deeper
 
 These are some of the most common benefits, which you might be used to from other statically typed
 languages. There's a few more, but listing them all would be a bit excessive. If you're thinking,
-"that's it?", the Rabbit hole goes much much deeper.
+"that's it?", the rabbit hole goes much much deeper.d
 
 [Giulio Canti](https://github.com/gcanti) has written quite a few articles on the more advanced
-things that you can do with flow that gives it a level of expressiveness close to that of Haskell's
-type system.
+things that you can do with flow that gives it a level of expressiveness that allows you to do be
+certain of much more than just variable types, parameter types, and return types.
 
-* [Phantom Types with Flow](https://medium.com/@gcanti/phantom-types-with-flow-828aff73232b#.su86baahz)
-* [Refinement Types with Flow](https://medium.com/@gcanti/refinements-with-flow-9c7eeae8478b#.e2ik0oqgs)
-* [Higher Kinded Types with Flow](https://medium.com/@gcanti/higher-kinded-types-in-flow-275b657992b7#.1oa0j4u1a)
-* [The Eff Monad Implemented in Flow](https://medium.com/@gcanti/the-eff-monad-implemented-in-flow-40803670c3eb#.i067byfnq)
+* You can use types to check if code has been validated in [Phantom Types with Flow](https://medium.com/@gcanti/phantom-types-with-flow-828aff73232b#.su86baahz)
+* You can create types with built in constraints in [Refinement Types with Flow](https://medium.com/@gcanti/refinements-with-flow-9c7eeae8478b#.e2ik0oqgs)
+* You can create higher kinded types in [Higher Kinded Types with Flow](https://medium.com/@gcanti/higher-kinded-types-in-flow-275b657992b7#.1oa0j4u1a)
+* You can express the side effects of your code as types in [The Eff Monad Implemented in Flow](https://medium.com/@gcanti/the-eff-monad-implemented-in-flow-40803670c3eb#.i067byfnq)
 
 He also has authored [flow-static-land,](https://github.com/gcanti/flow-static-land) which is pretty mind blowing.
 
 ## Conclusion
 
-TL;DR: Static types make your code easier to understand, reason about, and prevent common mistakes.
+TL;DR: Flow, which adds static types in JavaScript, makes your code easier to understand, reason
+about, and prevents common mistakes. All of this with little upfront cost, and the ability to opt-in
+slowly.
