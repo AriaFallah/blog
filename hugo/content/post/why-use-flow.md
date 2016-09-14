@@ -14,7 +14,7 @@ code.
 
 <!--more-->
 
-Their own homepage says:
+According to flow's homepage:
 
 > Flow can catch common bugs in JavaScript programs before they run, including
 >
@@ -31,16 +31,21 @@ codebase. Pretty cool!
 
 ## Types
 
-Before we even address flow, however, we must first clarify what types are, and the different
-variations of types.
+Before we even address flow, however, we must first clarify what types are. I'm going to go ahead
+and use the definition in [Wikipedia's data types article:](https://en.wikipedia.org/wiki/Data_type)
 
-> A type is a classification identifying one of various types of data, such as real, integer or Boolean,
-that determines the possible values for that type, the operations that can be done on values of that
-type, the meaning of the data, and the way values of that type can be stored.<sup>[1]</sup>
+> A type is a classification identifying one of various types of data, such as real, integer or
+boolean, that determines the possible values for that type, the operations that can be done on
+values of that type, the meaning of the data, and the way values of that type can be stored.
 
-[1]: https://en.wikipedia.org/wiki/Data_type
+More simply put, in my own words, types are rules about the data in your program, and those
+rules help the computer determine what you can and can't do with that data, which can be pretty
+helpful if you accidentally try to break those rules.
 
-As for the variations in types it falls into two categories.
+As you write code in different languages though, you'll notice that the ways that types manifest
+themselves can vary quite a bit, from being explicitly required, to optional, to nearly non-existent.
+Generally the type systems of programming languages fall into two categories: Strong vs. Weak and
+Static vs Dynamic.
 
 ### Strong typing vs. Weak typing
 
@@ -95,9 +100,8 @@ console.log({} + 2) // 2
 console.log({} + 'hello') // NaN
 ```
 
-You can see how if you make a mistake and end up passing incorrect parameters to function
-that causes it to return an unexpected value, `NaN` for example, it can begin to propagate itself
-throughout your codebase, causing problems that are hard to find because there are no errors.
+I think you can imagine all the possible problems that arise from all this happening without throwing
+any errors whatsoever.
 
 ### Static typing vs. Dynamic typing
 
@@ -113,7 +117,7 @@ Now given that disclaimer:
 
 In a statically typed language, you explicitly write out the types of your variables. Most people
 have seen Java, a strongly, statically typed language, where you write the types of your variables
-out such as `int x`, and the return type and parameter types of your functions such as
+out such as `int` or `String`, and the return type and parameter types of your functions like
 `int add(int a, int b)`:
 
 ```java
@@ -206,19 +210,26 @@ Now that we know more about types, we can get back to the matter at hand, which 
 to make mistakes in your JavaScript code.
 
 JavaScript is both weakly and dynamically typed, which is a flexible but extremely error prone
-combination as you can see in following example and countless others that criticize these qualities
-of the language.
+combination. As we read above, we know that due to implicit casting all operations between values of
+different types happen without error regardless of whether or not those operations are valid
+(weak typing), and that you never write out your types yourself (dynamic typing).
+
+This mishmash of weak and dynamic is pretty unfortunate as you can see in following example and
+countless others that criticize these qualities of the language.
 
 * [wat](https://www.destroyallsoftware.com/talks/wat)
 
-The solution to all these problems is flow, which through static typing, addresses a lot of the pain
-points of the language like the one above.
+The solution to most of these problems is flow, which through static typing and type inference,
+addresses a lot of the pain points of the language like the one above.
 
 This isn't a tutorial, so if you want to follow along you can check out
 [the getting started guide for flow.](https://flowtype.org/docs/getting-started.html)
 
 Lets go ahead and return to our very first JS example in the weak typing section, but this time with
-flow checking our code:
+flow checking our code.
+
+We add `// @flow` to the first line of the program to opt into typing, and then run the command line
+tool `flow` to check our code (IDE integration is also possible):
 
 ```js
 // @flow
@@ -232,7 +243,7 @@ console.log({} + 2) // 2
 console.log({} + 'hello') // NaN
 ```
 
-Immediately every single line becomes a type error similar to the one below.
+Immediately **every single line** becomes a type error similar to the one below.
 
 ```js
 index.js:3
@@ -249,7 +260,7 @@ incorrect going on. The `wat` video doesn't really apply anymore.
 
 While flow will help catch errors like the one above, to truly start benefiting from it, you'll
 have to write your own type annotations, meaning you use either flow's built in types such as
-`number`, `string`, `null`, `boolean`, `etc.` to specify the types of your variables or you create
+`number`, `string`, `null`, `boolean`, `etc.` to specify the types of your values or you create
 some type aliases of your own such as
 
 ```js
@@ -260,10 +271,30 @@ type Person = {
 }
 ```
 
-When you begin to do this, flow learns more about your code base and gets better at telling you what
-mistakes you've made.
+Now you can transform a function such as
 
-## Examples
+```js
+function xyz(x, y, z) {
+  return x + y + z
+}
+```
+
+into
+
+```js
+// @flow
+
+function xyz(x: number, y: number, z: number): number {
+  return x + y + z
+}
+```
+
+In this specific case we know that xyz is supposed to take in 3 numbers and return a number. Now if
+you tried to do `xyz({}, '2', [])`, which is 100% valid JavaScript (lol), flow would throw an error!
+As you begin to do this more and more, flow learns more about your code base and gets better at
+telling you what mistakes you've made.
+
+## A Few Examples
 
 **Catches Incorrect Number of Parameters Passed to Function**
 
@@ -427,15 +458,14 @@ index.js:9
 
 ## Going Deeper
 
-These are some of the most common benefits, which you might be used to from other statically typed
-languages. There's a few more, but listing them all would be a bit excessive. If you're thinking,
-"that's it?", the rabbit hole goes much much deeper.d
+There's a few more common benefits that I'm probably forgetting, but the above examples cover most
+of them. If you're thinking, "that's it?", the rabbit hole goes much much deeper.
 
 [Giulio Canti](https://github.com/gcanti) has written quite a few articles on the more advanced
-things that you can do with flow that gives it a level of expressiveness that allows you to do be
-certain of much more than just variable types, parameter types, and return types.
+things that you can do with flow that allow you to do be certain of much more than just variable
+types, parameter types, and return types.
 
-* You can use types to check if code has been validated in [Phantom Types with Flow](https://medium.com/@gcanti/phantom-types-with-flow-828aff73232b#.su86baahz)
+* You can use types to check if user input has been validated in [Phantom Types with Flow](https://medium.com/@gcanti/phantom-types-with-flow-828aff73232b#.su86baahz)
 * You can create types with built in constraints in [Refinement Types with Flow](https://medium.com/@gcanti/refinements-with-flow-9c7eeae8478b#.e2ik0oqgs)
 * You can create higher kinded types in [Higher Kinded Types with Flow](https://medium.com/@gcanti/higher-kinded-types-in-flow-275b657992b7#.1oa0j4u1a)
 * You can express the side effects of your code as types in [The Eff Monad Implemented in Flow](https://medium.com/@gcanti/the-eff-monad-implemented-in-flow-40803670c3eb#.i067byfnq)
@@ -444,6 +474,9 @@ He also has authored [flow-static-land,](https://github.com/gcanti/flow-static-l
 
 ## Conclusion
 
-TL;DR: Flow, which adds static types in JavaScript, makes your code easier to understand, reason
-about, and prevents common mistakes. All of this with little upfront cost, and the ability to opt-in
-slowly.
+TL;DR:
+
+* JavaScript is weakly and dynamically typed, which is error prone and a big reason for the bad rep
+of the language.
+* With little upfront cost and with the ability to opt-in slowly, Flow fixes both of these things
+by adding a type system to JavaScript.
