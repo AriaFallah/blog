@@ -1,5 +1,6 @@
 * {
   margin: 0;
+  box-sizing: border-box;
   font-family: 'Inconsolata', monospace;
 }
 
@@ -25,12 +26,20 @@ pre {
   width: 100%;
   position: relative;
   margin: 20px 0;
+  margin-left: 1.5em;
+}
+
+@media (max-width: 768px) {
+  pre {
+    margin-left: 0;
+  }
 }
 
 code {
   padding: 2px 5px;
   background-color: #e7e7e7;
 }
+
 code:last-child {
   overflow-x: auto;
 }
@@ -117,6 +126,8 @@ li + li {
 .article h1,
 .article h2,
 .article h3 {
+  margin-top: 1.4em;
+  margin-bottom: 1.2em;
   padding-bottom: 0.3em;
   border-bottom: 1px solid #eee;
 }

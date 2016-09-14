@@ -48,6 +48,7 @@ print x + "" # cannot add integers to strings
 throws the error
 
 ```python
+# cannot add integers to strings
 TypeError: unsupported operand type(s) for +: 'int' and 'str'
 ```
 
