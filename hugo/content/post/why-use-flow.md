@@ -184,9 +184,14 @@ will run just fine even if the code contains type errors.
 
 ---
 
-To be fair about the conciseness, Java isn't the most terse language. Here's the same code
-written in some obligatory Haskell. I mean if I'm talking about types and don't write some Haskell,
-did I really talk about types?
+**Type Inference in Statically Typed Languages**
+
+What I said earlier about statically typed languages needing types to be explicitly written out is
+not 100% true. In languages without type inference such as Java this is true, but in languages with type
+inference, you can leave it to the computer to figure out what types you're using. For example,
+the following example contains the same code above written in Haskell, a language known for its
+really powerful type system, but where I write `let x = 1` as well as where I write `let add' = (+)`
+ Haskell infers the types, and doesn't require explicit guidance.
 
 **Haskell**
 
@@ -197,12 +202,21 @@ main = do
   let y = 2
   let s = ""
 
-  print (add x y)
-  print (add x s)
+  -- Type inference
+  let add' = (+)
 
+  print (add x y)  -- 3
+  print (add' x y) -- 3
+  print (add x s)  -- throws error
+
+-- With Explicit Types
 add :: Int -> Int -> Int
 add = (+)
 ```
+
+Type inference exists in many other type systems including flow's type system. The general idea
+though is that while type inference makes your life a bit easier since you don't have to write as much,
+you can't and shouldn't rely on type inference for everything.
 
 ## Bringing it back to JavaScript and Flow
 
