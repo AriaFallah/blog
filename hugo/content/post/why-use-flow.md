@@ -96,8 +96,8 @@ more; even worse, none of it throws an error if it's an accident.
 console.log({} + {}) // NaN
 console.log({} + []) // 0
 console.log([] + []) // ''
-console.log({} + 2) // 2
-console.log({} + 'hello') // NaN
+console.log({} + 2) // [object Object]2
+console.log({} + 'hello') // [object Object]hello
 ```
 
 I think you can imagine all the possible problems that arise from all this happening without throwing
@@ -253,8 +253,8 @@ tool `flow` to check our code (IDE integration is also possible):
 console.log({} + {}) // NaN
 console.log({} + []) // 0
 console.log([] + []) // ''
-console.log({} + 2) // 2
-console.log({} + 'hello') // NaN
+console.log({} + 2) // [object Object]2
+console.log({} + 'hello') // [object Object]hello
 ```
 
 Immediately **every single line** becomes a type error similar to the one below.
