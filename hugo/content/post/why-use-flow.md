@@ -57,8 +57,9 @@ definition. I'm going to go with the definition on the wikipedia page titled
 
 ---
 
-In a strongly typed language such as python, a variable cannot change its type after it has first
-been declared unless you explicitly cast it to another type temporarily, or it is redeclared later.
+In a strongly typed language such as python, a mismatch between two incompatible values will cause
+a type error. The only way to avoid type errors is to explicitly transform values such that they
+match up.
 
 ```python
 x = 5
@@ -75,22 +76,14 @@ but this is fine
 
 ```python
 x = 5
-x = ""
-print x + "" # redeclared x so it's fine
-```
-
-and so is this
-
-```python
-x = 5
-print str(x) + "" # casted x to a string so it's fine
+print str(x) + "" # transformed x to a string so it's fine
 ```
 
 ---
 
 In a weakly typed language such as JavaScript, anything goes because variables are all implicitly
-casted when they're used. You can add strings to Objects, Arrays to Objects, numbers to null, and
-more; even worse, none of it throws an error if it's an accident.
+have their types converted when they're used. You can add strings to Objects, Arrays to Objects,
+numbers to null, and more; even worse, none of it throws an error if it's an accident.
 
 ```js
 console.log({} + {}) // NaN
@@ -115,8 +108,11 @@ the following are great discussions
 
 Now given that disclaimer:
 
-In a statically typed language, you explicitly write out the types of your variables. Most people
-have seen Java, a strongly, statically typed language, where you write the types of your variables
+**Static Typing**
+
+As far as I know most statically typed languages are also strongly typed. Moreover, in a statically
+typed language, you explicitly write out the types of your variables. Most people
+have seen Java, a statically typed language, where you write the types of your variables
 out such as `int` or `String`, and the return type and parameter types of your functions like
 `int add(int a, int b)`:
 
@@ -150,40 +146,6 @@ compiling to find mistakes.
 * If the function was instead called `sfjkasjf` instead of `add`, you'd still know that it takes in
 two integers and returns an integer, which is useful information.
 
----
-
-In a dynamically typed language, you don't have to write out your types at all. The main benefit
-being that your code looks less cluttered, and you don't have to think about types before starting to
-program, which is a productivity boost. In python, a strongly, dynamically typed language, the
-equivalent code would look like:
-
-```python
-def main():
-  x = 5
-  y = 10
-  s = "1.23131"
-
-  print add(x, y) # 15
-  print add(x, s) # TypeError: unsupported operand type(s) for +: 'int' and 'str'
-
-def add(a, b):
-  return a + b
-```
-
-This code will throw an error at line 7 when you run your code because you cannot add
-a `string` type to an `int` type.
-
-Note that
-
-* The code is more concise
-* You can't really tell what the type of `a` and `b` are. `int`, `string`, `float`, `etc.` are all
-possibilities.
-* It still throws an error when you run it, albeit at run-time rather than compile-time, which is
-a big distinction. This means testing is more crucial for dynamically typed languages because they
-will run just fine even if the code contains type errors.
-
----
-
 **Type Inference in Statically Typed Languages**
 
 What I said earlier about statically typed languages needing types to be explicitly written out is
@@ -191,7 +153,7 @@ not 100% true. In languages without type inference such as Java this is true, bu
 inference, you can leave it to the computer to figure out what types you're using. For example,
 the following example contains the same code above written in Haskell, a language known for its
 really powerful type system, but where I write `let x = 1` as well as where I write `let add' = (+)`
- Haskell infers the types, and doesn't require explicit guidance.
+Haskell infers the types, and doesn't require explicit guidance.
 
 **Haskell**
 
@@ -215,8 +177,48 @@ add = (+)
 ```
 
 Type inference exists in many other type systems including flow's type system. The general idea
-though is that while type inference makes your life a bit easier since you don't have to write as much,
-you can't and shouldn't rely on type inference for everything.
+though is that while type inference makes your life a bit easier since you don't have to write
+as much, you can't and shouldn't rely on type inference for everything.
+
+---
+
+**Dynamic Typing**
+
+In a dynamically typed language, the only concept of typing comes from the types of
+the values in your code. You never write out types yourself. The main benefit of this is that your
+code looks less cluttered, and you don't have to think about types at all while programming, which
+is a productivity boost in the short run. In python, the above code for addition would look like:
+
+```python
+def main():
+  x = 5
+  y = 10
+  s = "1.23131"
+
+  print add(x, y) # 15
+  print add(x, s) # TypeError: unsupported operand type(s) for +: 'int' and 'str'
+
+def add(a, b):
+  return a + b
+```
+
+This code will throw an error at line 7 when you run your code because you cannot add
+a `string` type to an `int` type. Remember though, that the only reason this is an error is because
+python is strongly typed. `add(5, "1.2313213")` would be 100% valid in a weakly typed language like
+JavaScript.
+
+Note that
+
+* The code is more concise
+* There is no type inference going on. In dynamically typed languages variables are just containers
+for values, and have no other special properties. `add(x, s)` fails because during run-time you try
+to add an `int` and a `string` not because the interpreter figured out in advance `x` and `s` are
+not compatible.
+* You can't really tell what the type of `a` and `b` are. `int`, `string`, `float`, `etc.` are all
+possibilities.
+* It still throws an error when you run it, albeit at run-time rather than compile-time, which is
+a big distinction. This means testing is more crucial for dynamically typed languages because they
+will run just fine even if the code contains type errors.
 
 ## Bringing it back to JavaScript and Flow
 
@@ -473,11 +475,14 @@ index.js:9
 ## Going Deeper
 
 There's a few more common benefits that I'm probably forgetting, but the above examples cover most
-of them. If you're thinking, "that's it?", the rabbit hole goes much much deeper.
+of them. If you're thinking, "that's it?", the rabbit hole goes much much deeper. Types are really
+powerful almost to the point that they're like tests that you inline into your code. It's not just
+about variable types or return types, but every single aspect of your program that can be conceptualized
+as a type.
 
 [Giulio Canti](https://github.com/gcanti) has written quite a few articles on the more advanced
-things that you can do with flow that allow you to do be certain of much more than just variable
-types, parameter types, and return types.
+things that you can do with flow that allow you to make sure every part of your code is working as
+intended.
 
 * You can use types to check if user input has been validated in [Phantom Types with Flow](https://medium.com/@gcanti/phantom-types-with-flow-828aff73232b#.su86baahz)
 * You can create types with built in constraints in [Refinement Types with Flow](https://medium.com/@gcanti/refinements-with-flow-9c7eeae8478b#.e2ik0oqgs)
