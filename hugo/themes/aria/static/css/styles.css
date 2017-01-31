@@ -1,7 +1,8 @@
 * {
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Inconsolata', monospace;
+  text-rendering: optimizeLegibility;
+  font-family: 'Open Sans', sans-serif;
 }
 
 html, body {
@@ -27,6 +28,10 @@ pre {
   position: relative;
   margin: 20px 0;
   margin-left: 1.5em;
+}
+
+pre * {
+  font-family: 'Fira Mono', monospace;
 }
 
 @media (max-width: 768px) {
