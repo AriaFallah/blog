@@ -154,20 +154,23 @@ li + li {
   margin-bottom: -100px;
 }
 
-.site-footer, .page-wrap:after {
-  height: 100px;
-}
-
 .page-wrap:after {
   content: "";
   display: block;
 }
 
 .site-footer {
-  display: flex;
-  padding-left: 10px;
-  padding-right: 10px;
-  align-items: flex-end;
+  position: relative;
+}
+
+.site-footer .copyright {
+  position: absolute;
+  left: 10px;
+  bottom: 0;
+}
+
+.site-footer, .page-wrap:after {
+  height: 100px;
 }
 
 .stub .article p {
