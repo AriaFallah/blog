@@ -1,17 +1,17 @@
 ---
 date: 2017-03-19T21:32:56-04:00
-description: "Solving the problem of storing secrets in plaintext on your computer."
+description: "Using the keychain to remove plaintext secrets from your scripts."
 draft: false
 slug: storing-secrets-with-keychain
 tags:
 - ""
-title: Storing Secrets in the MacOS keychain
+title: Storing Secrets Using the MacOS Keychain CLI
 ---
 
 I recently discovered that the MacOS keychain has a command-line interface, and
 I decided that instead of storing my secrets on my personal laptop in plaintext,
 I could take advantage of the CLI to prevent the secrets from ever being stored on
-disk unencrypted. It's kinda overkill, but I think it's cool.
+disk unencrypted.
 
 <!--more-->
 
@@ -50,12 +50,12 @@ export SECRET1='jfkdj*$&#3*($JLAFfh131)'
 echo Check out my secret $SECRET1
 ```
 
-Of course environment variables are not the only way to do it, but regardless of
-the method, even though the secrets aren't committed into your VCS, they will
-still be in plaintext on your computer. This means that if anyone were to gain
-unauthorized access to your computer they'd be able to steal or use them. This
-is where the MacOS keychain app comes in since we can use it to encrypt your
-secrets.
+Of course environment variables are not the only way to avoid the two pitfalls
+above, but regardless of the method, even though the secrets aren't committed
+into your VCS, they will still be in plaintext on your computer. This means
+that if anyone were to gain unauthorized access to your computer they'd be
+able to steal or use your secrets. This is where the MacOS keychain app comes
+in since we can use it to encrypt your secrets.
 
 *(As a side note, I figure that at that point, if someone or some program
 compromised the security of your computer, you're screwed to the point where it'd
@@ -165,7 +165,7 @@ Usage:
   sec ls
 ```
 
-### Wrapping it up
+### Putting it to use
 
 Now assuming you've run
 
@@ -202,8 +202,8 @@ such as
 * https://www.passwordstore.org/
 * https://github.com/lastpass/lastpass-cli
 
-or others that I'm unaware of, but having a simple, native solution is nice
-as well.
+or others that I'm unaware of, but having a simple, native solution is what
+I like about the keychain.
 
 [1]: https://github.com/StackExchange/blackbox
 [2]: https://goo.gl/BH2Oaj

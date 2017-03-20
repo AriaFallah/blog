@@ -121,6 +121,7 @@ li + li {
 
 .article {
   padding: 10px;
+  text-align: justify;
 }
 
 .article a {
