@@ -2,8 +2,7 @@
 date: 2016-09-13T01:40:14.700Z
 slug: hello-world
 tags:
-  - "Hello"
-  - "World"
+  - ""
 title: Hello World
 ---
 

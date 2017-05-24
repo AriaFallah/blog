@@ -1,10 +1,10 @@
 ---
 date: 2016-09-13T09:19:22-04:00
 description: "An introduction to and explanation of the benefits of static typing in JavaScript"
-draft: false
 slug: why-use-flow
 tags:
   - "flow"
+  - "javascript"
 title: Why Use Flow?
 ---
 
