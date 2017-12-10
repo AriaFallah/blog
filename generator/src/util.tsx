@@ -12,7 +12,7 @@ export function makePage(pageContent: React.ReactElement<any>): string {
   const helmet = Helmet.renderStatic();
   const html = `
   <!doctype html>
-  <html ${helmet.htmlAttributes.toString()}>
+  <html lang="en">
     <head>
       ${helmet.title.toString()}
       <meta charset="utf-8" />
