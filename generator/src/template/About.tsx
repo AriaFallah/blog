@@ -7,6 +7,9 @@ class About extends React.Component {
   render() {
     return (
       <Aux>
+        <Helmet>
+          <title>About Me</title>
+        </Helmet>
         <h2>About me</h2>
         <p>
           Hi, my name is <a href="https://www.aria.ai">Aria Fallah</a>. I'm
