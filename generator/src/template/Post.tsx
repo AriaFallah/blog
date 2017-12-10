@@ -16,7 +16,7 @@ class Post extends React.Component<Props> {
         <Helmet>
           <title>{frontMatter.title}</title>
           <meta name="description" content={frontMatter.description} />
-          <link rel="stylesheet" href="/assets/prism.css" />
+          <link rel="stylesheet" href="/assets/styles/prism.css" />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Fira+Mono"

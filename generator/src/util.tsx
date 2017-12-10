@@ -18,8 +18,7 @@ export function makePage(pageContent: React.ReactElement<any>): string {
       <meta charset="utf-8" />
       ${helmet.meta.toString()}
       ${helmet.link.toString()}
-      <link rel="stylesheet" href="/assets/standard.css" />
-      <link rel="stylesheet" href="/assets/index.css" />
+      <link rel="stylesheet" href="/assets/styles/index.css" />
     </head>
     <body ${helmet.bodyAttributes.toString()}>
       ${body}

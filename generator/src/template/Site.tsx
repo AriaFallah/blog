@@ -23,20 +23,24 @@ class Site extends React.Component {
           <link
             rel="shortcut icon"
             type="image/png"
-            href="/assets/favicon.ico"
+            href="/assets/icons/favicon.ico"
           />
         </Helmet>
 
         <div className="content">
           <nav className="nav">
             <a href="/">
-              <img className="home" src="/assets/home.svg" alt="home" />
+              <img className="home" src="/assets/icons/home.svg" alt="home" />
             </a>
             <a href="/about.html">
-              <img className="about" src="/assets/question.svg" alt="about" />
+              <img
+                className="about"
+                src="/assets/icons/question.svg"
+                alt="about"
+              />
             </a>
             <a href="https://www.aria.ai">
-              <img className="logo" src="/assets/logo.svg" alt="logo" />
+              <img className="logo" src="/assets/icons/logo.svg" alt="logo" />
             </a>
           </nav>
           <main className="main">{this.props.children}</main>
