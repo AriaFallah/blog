@@ -1,0 +1,41 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@types/fs-extra": "^4.0.5",
+    "@types/html-minifier": "^1.1.30",
+    "@types/js-yaml": "^3.10.1",
+    "@types/markdown-it": "^0.0.4",
+    "@types/mkdirp": "^0.5.2",
+    "@types/node": "^8.0.53",
+    "@types/prismjs": "^1.6.5",
+    "@types/react": "^16.0.25",
+    "@types/react-dom": "^16.0.3",
+    "@types/react-helmet": "^5.0.3",
+    "@types/react-router": "^4.0.19",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "fs-extra": "^4.0.3",
+    "html-minifier": "^3.5.7",
+    "js-yaml": "^3.10.0",
+    "markdown-it": "^8.4.0",
+    "mkdirp": "^0.5.1",
+    "prismjs": "^1.9.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-helmet": "^5.2.0",
+    "react-router": "^4.2.0",
+    "ts-loader": "^3.2.0",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.6.2",
+    "typography": "^0.16.6",
+    "typography-theme-us-web-design-standards": "^0.16.9",
+    "webpack": "^3.9.1",
+    "webpack-dev-server": "^2.9.5"
+  },
+  "scripts": {
+    "build": "tsc -p ."
+  }
+}
