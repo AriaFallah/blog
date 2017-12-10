@@ -9,6 +9,7 @@ class Site extends React.Component {
     return (
       <Aux>
         <Helmet>
+          <meta name="description" content="Aria Fallah's blog about programming and other things too" />
           <meta name="HandheldFriendly" content="True" />
           <meta http-equiv="cache-control" content="max-age=0" />
           <meta http-equiv="X-UA-Compatible" content="IE=edge" />
