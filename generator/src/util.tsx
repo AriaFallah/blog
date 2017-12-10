@@ -23,6 +23,15 @@ export function makePage(pageContent: React.ReactElement<any>): string {
     </head>
     <body ${helmet.bodyAttributes.toString()}>
       ${body}
+      
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-79031036-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-79031036-1');
+      </script>
     </body>
   </html>`;
 
