@@ -12,24 +12,27 @@ class About extends React.Component {
         </Helmet>
         <h2>About me</h2>
         <p>
-          Hi, my name is <a href="https://www.aria.ai">Aria Fallah</a>. I'm
-          currently a senior at UMBC majoring in Computer Science and minoring
-          in Mathematics. I work as a Software Engineering Intern at FiscalNote,
-          and this summer I'm excited to be starting at Facebook as a Software
-          Engineer. In my free time, I like to work on{' '}
-          <a href="https://www.github.com/AriaFallah">side projects</a>,{' '}
-          <a href="https://www.instagram.com/m0meni">take pictures</a>, and
+          Hi, my name is <a href="https://www.aria.ai">Aria Fallah</a>, and I'm
+          a senior studying Computer Science and Mathematics at UMBC. During the
+          school year, I intern at{' '}
+          <a href="https://fiscalnote.com/">FiscalNote</a> performing multiple
+          roles ranging from building UIs to working with big data and ETL
+          pipelines. Last summer, I interned at Facebook developing the
+          infrastructure and interfaces that enable people to purchase movie
+          tickets on the site. After I graduate, I'm excited to join Facebook as
+          a full time Software Engineer. Outside of work, I like to spend my
+          time on <a href="https://www.github.com/AriaFallah">side projects</a>,{' '}
+          <a href="https://www.instagram.com/m0meni">photography</a>, and
           exercise.
         </p>
         <p>
           This blog is{' '}
           <a href="https://www.github.com/AriaFallah/blog">open source</a>, and
-          is generated using a{' '}
+          generated using a{' '}
           <a href="https://github.com/AriaFallah/blog/tree/master/generator">
             static site generator
           </a>{' '}
-          that I wrote myself. I figured it'd be cool to make my own generator,
-          and it worked out pretty well.
+          that I wrote myself.
         </p>
         <div className="social">
           <a href="https://github.com/ariafallah">
