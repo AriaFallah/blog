@@ -7,7 +7,10 @@ import { Site } from './template/Site';
 
 export const Aux: any = ({ children }: any) => children;
 
-export function makePage(pageContent: React.ReactElement<any>): string {
+export function makePage(
+  pageContent: React.ReactElement<any>,
+  css: string
+): string {
   const body = renderToStaticMarkup(<Site>{pageContent}</Site>);
   const helmet = Helmet.renderStatic();
   const html = `
@@ -17,11 +20,30 @@ export function makePage(pageContent: React.ReactElement<any>): string {
       ${helmet.title.toString()}
       <meta charset="utf-8" />
       ${helmet.meta.toString()}
-      ${helmet.link.toString()}
-      <link rel="stylesheet" href="/assets/styles/index.css" />
+      <style>
+        ${css}
+      </style>
     </head>
     <body ${helmet.bodyAttributes.toString()}>
       ${body}
+
+      <noscript id="deferred-styles">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Serif+Pro">
+        ${helmet.link.toString()}
+      </noscript>
+      <script>
+        var loadDeferredStyles = function () {
+          var addStylesNode = document.getElementById("deferred-styles");
+          var replacement = document.createElement("div");
+          replacement.innerHTML = addStylesNode.textContent;
+          document.body.appendChild(replacement)
+          addStylesNode.parentElement.removeChild(addStylesNode);
+        };
+        var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+          window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+        if (raf) raf(function () { window.setTimeout(loadDeferredStyles, 0); });
+        else window.addEventListener('load', loadDeferredStyles);
+      </script>
       
       <!-- Global site tag (gtag.js) - Google Analytics -->
       <script async src="https://www.googletagmanager.com/gtag/js?id=UA-79031036-1"></script>

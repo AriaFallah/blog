@@ -46,6 +46,11 @@ async function main() {
   fs.mkdirpSync(POST_OUT_DIR);
   fs.copySync(ASSETS_SRC_DIR, ASSETS_OUT_DIR);
 
+  const indexCSS = fs.readFileSync(
+    path.join(ASSETS_SRC_DIR, 'styles', 'index.css'),
+    'utf8'
+  );
+
   // Create post pages
   const postFiles = fs.readdirSync(POST_SRC_DIR);
   const posts = (await Promise.all(
@@ -76,9 +81,14 @@ async function main() {
   ];
 
   // Write pages to output paths
-  const otherPages = [<Home posts={posts} />, <About />].map(makePage);
+  const otherPages = [<Home posts={posts} />, <About />].map(p =>
+    makePage(p, indexCSS)
+  );
   const postPages = posts.map(p =>
-    makePage(<Post frontMatter={p.frontMatter} postHtml={{ __html: p.body }} />)
+    makePage(
+      <Post frontMatter={p.frontMatter} postHtml={{ __html: p.body }} />,
+      indexCSS
+    )
   );
 
   await Promise.all(
