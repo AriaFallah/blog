@@ -65,7 +65,7 @@ blockquote {
 pre {
   margin-left: 1.45em;
   counter-reset: line;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 span.line-number::before {
