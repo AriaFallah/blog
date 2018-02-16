@@ -1,0 +1,2 @@
+/post/* https://www.aria.ai/blog/posts/:splat 301
+/* https://www.aria.ai/blog/:splat 301
